@@ -1,4 +1,5 @@
 # raise error if no params
+require_relative 'initialize'
 module MobilePagination
   class << self
     attr_accessor :configuration
@@ -12,7 +13,7 @@ module MobilePagination
   class Config
     attr_accessor :list_item_class
 
-    def initialize(data={})
+    def initialize(data = {})
       @list_item_class    = data[:list_item_class]
     end
     # <ul class="pagination-links"><li class="btns"><a class="tag_link_first pagination_first_link sprite" href="/apartments/Georgia/Atlanta/?page=1" title="First Page"></a></li><li class="btns"><a class="tag_link_prev pagination_previous_link sprite" href="/apartments/Georgia/Atlanta/?page=1" title="Previous Page"></a></li><li><div class="current">Page 2 of 86</div></li><li class="btns"><a class="tag_link_next pagination_next_link sprite next_page_link" href="/apartments/Georgia/Atlanta/?page=3" title="Next Page"></a></li><li class="btns"><a class="tag_link_last pagination_last_link sprite next_page_link" href="/apartments/Georgia/Atlanta/?page=86" title="Last Page"></a></li></ul>
@@ -25,9 +26,9 @@ module MobilePagination
 
     attr_accessor :total_pages
 
-    def iniitialize(total_pages, current_page, type = 'ol')
-      @total_pages  = total_pages
-      @current_page = current_page
+    def iniitialize(options)
+      @total_pages  = options[:total_pages]
+      @current_page = options[:page] || 0
     end
 
     # def check_opts

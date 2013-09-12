@@ -1,4 +1,3 @@
-# require "mobile_pagination/version"
 require_relative 'mobile_pagination/initialize'
 
 module MobilePagination
@@ -12,27 +11,56 @@ module MobilePagination
   end
 
   class Configuration
-    attr_accessor :list_item_class
+
+    attr_accessor :list_item_class, :show_summary, :page_key
 
     def initialize(data={})
-      @list_item_class = data[:list_item_class]
+      @show_summary    = data[:show_summary] || false
+      @list_item_class = data[:list_item_class] || ''
+      @page_key        = data[:page] || 'page'
     end
   end
 
   class Paginate
     # MobilePagination::Paginate.new(params).html
     # raise error if no params
-    def iniitialize(options = {})
-      @total_pages  = options[:total_pages]
-      @current_page = options[:page]
+    # do i have access to request.query_parameters in the view
+    def initialize(opts)
+      @query_params = options[:query_parameters] || {}
+      @page         = options[:page] || 0
+      # @total_pages      = options[:total_pages]
+      # @current_page     = options[:page]
+    end
+
+    def html
+      html = ''
+
+      if previous_page?
+        html <<
+        '<li.btns>
+          <a.tag_link_first.pagination_first_link.sprite title="First Page" href="#{first_page_link}"><a/>
+        </li>'
+      end
+    end
+
+    def previous_page
+      "#{page_url(current_page - 1)}" if current_page > 1
+    end
+
+    def first_page_link
+      "#{page_url(1)}"
     end
 
     def page_url(page_number)
-      query_params = request.query_parameters.merge(:page => page_number)
-      uri = Addressable::URI.new
-      uri.query_values = query_params
+      uri = Addressable::URI.new.query_values = query_params
       request.path + '/?' + uri.query
     end
+
+    def current_page
+      current_page = @results['current_page']
+      current_page > total_pages ? total_pages : current_page
+    end
+
 
     # def check_opts
     #   @total_pages.to_i if @total_pages.is_a? String
@@ -46,9 +74,7 @@ module MobilePagination
     #   build_links
     # end
 
-    # def previous_page
-    #   "#{page_url(current_page - 1)}" if current_page > 1
-    # end
+
 
     # def previous_page?
     #   !previous_page.nil?
@@ -84,10 +110,7 @@ module MobilePagination
 
     # private
 
-    # def current_page
-    #   current_page = @results['current_page']
-    #   current_page > total_pages ? total_pages : current_page
-    # end
+
 
     # def total_pages
     #   @results['total_pages']
@@ -103,9 +126,7 @@ module MobilePagination
     #   last_page = [first_page_in_group+group_size, total_pages].min
     # end
 
-    # def first_page_link
-    #   "#{page_url(1)}"
-    # end
+
 
     # def last_page_link
     #   "#{page_url(total_pages)}"
@@ -129,9 +150,6 @@ module MobilePagination
     #     page_number.to_s
     #   end
     # end
-
-    def html
-    end
 
   end
 

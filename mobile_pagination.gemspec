@@ -1,24 +1,25 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mobile_pagination/version'
+require 'date'
+require './lib/mobile_pagination/utils/version'
 
-Gem::Specification.new do |spec|
-  spec.name          = "mobile_pagination"
-  spec.version       = MobilePagination::VERSION
-  spec.authors       = ["Luke Fender"]
-  spec.email         = ["lfender6445@gmail.com"]
-  spec.description   = %q{Creates a series of list items for pagination based searches.}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
-  spec.license       = "MIT"
-  gem.add_dependency = "addressable", '~> 2.3.4'
+Gem::Specification.new do |gem|
+ gem.name          = "mobile_pagination"
+ gem.authors       = ["Luke Fender"]
+ gem.email         = ["lfender6445@gmail.com"]
+ gem.description   = %q{Creates a series of <li> pagination element relative to current page.}
+ gem.summary       = %q{Minimal pagination templating, best suited for mobile web apps. Configure, call, and paginate!}
+ gem.homepage      = 'http://github.com/lfender6445/mobile_pagination'
+ gem.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+ gem.add_dependency "addressable", '~> 2.3.4'
 
-  spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
+ gem.add_development_dependency "rake"
+
+ gem.required_ruby_version = '>= 1.9.3'
+ gem.platform      = Gem::Platform::RUBY
+ gem.date          = Date.today.to_s
+ gem.files         = `git ls-files`.split("\n")
+ gem.require_paths = ["lib"]
+ gem.version       = MobilePagination::VERSION
+
 end
