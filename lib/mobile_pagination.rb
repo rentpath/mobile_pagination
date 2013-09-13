@@ -12,39 +12,47 @@ module MobilePagination
 
   class Configuration
 
-    attr_accessor :list_item_class, :show_summary, :page_key
+    attr_accessor :list_item_global_class, :anchor_global_class, :page_key
 
     def initialize(data={})
-      @show_summary    = data[:show_summary] || false
-      @list_item_class = data[:list_item_class] || ''
-      @page_key        = data[:page] || 'page'
+      @list_item_global_class = data[:list_item_global_class] || ''
+      @anchor_global_class    = data[:anchor_class] || ''
+      @page_key               = data[:page_key] || :page
     end
   end
 
   class Paginate
-    # MobilePagination::Paginate.new(params).html
-    # raise error if no params
-    # do i have access to request.query_parameters in the view
+
     def initialize(opts)
-      @query_params = options[:query_parameters] || {}
-      @page         = options[:page] || 0
-      # @total_pages      = options[:total_pages]
-      # @current_page     = options[:page]
+      @current_page = current(opts[:page])
+      @total_pages  = opts[:total_pages] || 0
+      @total_pages  = opts[:path] || '/'
+      @query_params = query_to_hash(opts[:query])
+
+    end
+
+    def query_to_hash qs
+      Rack::Utils.parse_nested_query(qs) || {}
     end
 
     def html
-      html = ''
-
-      if previous_page?
-        html <<
-        '<li.btns>
-          <a.tag_link_first.pagination_first_link.sprite title="First Page" href="#{first_page_link}"><a/>
-        </li>'
+      ''.tap do |html|
+        html << first_link if previous_page?
       end
+    end
+
+    def first_link
+      '<li.btns>
+        <a.tag_link_first.pagination_first_link.sprite title="First Page" href="#{first_page_link}"></a>
+      </li>'
     end
 
     def previous_page
       "#{page_url(current_page - 1)}" if current_page > 1
+    end
+
+    def previous_page?
+      !previous_page.nil?
     end
 
     def first_page_link
@@ -52,14 +60,19 @@ module MobilePagination
     end
 
     def page_url(page_number)
-      uri = Addressable::URI.new.query_values = query_params
-      request.path + '/?' + uri.query
+      opts = { configuration.page_key => page_number }
+      uri = Addressable::URI.new.query_values = query_params.merge(opts)
+      path + '/?' + uri.query
     end
 
-    def current_page
-      current_page = @results['current_page']
-      current_page > total_pages ? total_pages : current_page
+    def current (page)
+      page = 0 if page.nil?
+      page > total_pages ? total_pages : page
     end
+
+        # def total_pages
+    #   @results['total_pages']
+    # end
 
 
     # def check_opts
@@ -76,9 +89,7 @@ module MobilePagination
 
 
 
-    # def previous_page?
-    #   !previous_page.nil?
-    # end
+
 
     # def next_page
     #  "#{page_url(current_page + 1)}" if current_page < total_pages
@@ -112,9 +123,7 @@ module MobilePagination
 
 
 
-    # def total_pages
-    #   @results['total_pages']
-    # end
+
 
     # def first_page_in_group
     #   mod_val = (current_page - 1) % group_size
