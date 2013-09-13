@@ -1,6 +1,6 @@
 # MobilePagination
 
-TODO: Write a gem description
+## Description
 
 ## Installation
 

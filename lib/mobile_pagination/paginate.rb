@@ -7,8 +7,8 @@ module MobilePagination
     def initialize(opts)
       @total_pages  = opts[:total_pages].to_i
       @current_page = current(opts[:current_page])
-      @path         = opts[:path] || '/'
       @query_params = query_to_hash(opts[:query])
+      @path         = opts[:path] || '/'
     end
 
     def html
@@ -21,18 +21,14 @@ module MobilePagination
       end
     end
 
+    private
+
     def should_paginate?
       @total_pages > 1
     end
 
     def previous_page
       "#{page_url(@current_page - 1)}"
-    end
-
-    def page_url(page=nil)
-      opts = { MobilePagination.configuration.page_key => page }
-      qs = hash_to_query(@query_params.merge(opts))
-      page.nil? ? "#{@path}" : "#{@path}?#{qs}"
     end
 
     def current(page)
@@ -57,7 +53,7 @@ module MobilePagination
     end
 
     def previous_page_link
-      previous == 1 ? "#{page_url}" : "#{page_url(previous)}"
+      previous == 1 ? "#{first_page_link}" : "#{page_url(previous)}"
     end
 
     def next_page_link
@@ -66,6 +62,15 @@ module MobilePagination
 
     def last_page_link
       "#{page_url(@total_pages)}"
+    end
+
+    def page_url(page=nil)
+      qs = hash_to_query(opts_with_key)
+      page.nil? ? "#{@path}" : "#{@path}?#{qs}"
+    end
+
+    def opts_with_key
+      @query_params.merge({ MobilePagination.configuration.page_key => page })
     end
 
   end
