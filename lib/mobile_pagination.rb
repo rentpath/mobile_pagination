@@ -39,24 +39,22 @@ module MobilePagination
     end
 
     def html
+      return '' unless should_paginate?
       ''.tap do |markup|
-        markup << first_link  if previous_page?
-        if next_page?
-          markup << second_link
-        end
+        markup << first_page_html    if previous_page?
+        markup << previous_page_html if previous_page?
+        markup << next_page_html     if next_page?
+        markup << last_page_html     if next_page?
       end
     end
 
-    def first_link
-      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
-        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Previous Page' href='#{previous_page_link}'>Previous Page</a>
-      </li>"
+
+    def goto_end?
+      @current_page != @total_pages
     end
 
-    def second_link
-      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
-        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Next Page' href='#{next_page_link}'>Next Page</a>
-      </li>"
+    def should_paginate?
+      @total_pages > 1
     end
 
     def previous_page
@@ -85,116 +83,45 @@ module MobilePagination
       page > @total_pages ? @total_pages : page
     end
 
-    # def check_opts
-    #   @total_pages.to_i if @total_pages.is_a? String
-    # end
-
-    # end
-
-    # def links
-    #   build_links
-    # end
-
     def next_page?
       not next_page_link.nil?
     end
 
     def next_page_link
-      if @current_page < @total_pages
-        "#{page_url(@current_page + 1)}"
-      end
+      "#{page_url(@current_page + 1)}" if @current_page < @total_pages
     end
 
+    def first_page_link
+      "#{page_url}"
+    end
 
-    # def previous_group
-    #   @previous_group ||= "#{page_url(first_page_in_group - group_size)}" if current_page > group_size
-    # end
+    def last_page_link
+      "#{page_url(@total_pages)}"
+    end
 
-    # def previous_group?
-    #   !previous_group.nil?
-    # end
+    def first_page_html
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='First Page' href='#{first_page_link}'>Frist Page</a>
+      </li>"
+    end
 
-    # def next_group
-    #   @next_group ||= "#{page_url(first_page_in_group + group_size)}" if (first_page_in_group + group_size) < total_pages
-    # end
+    def previous_page_html
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Previous Page' href='#{previous_page_link}'>Previous Page</a>
+      </li>"
+    end
 
-    # def next_group?
-    #   !next_group.nil?
-    # end
+    def next_page_html
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Next Page' href='#{next_page_link}'>Next Page</a>
+      </li>"
+    end
 
-    # def group_size
-    #   3
-    # end
-
-    # private
-
-
-
-
-
-    # def first_page_in_group
-    #   mod_val = (current_page - 1) % group_size
-    #   first_page = mod_val == 0 ? current_page : current_page - mod_val
-    # end
-
-    # def last_page_in_group
-    #   mod_val = (current_page - 1) % group_size
-    #   last_page = [first_page_in_group+group_size, total_pages].min
-    # end
-
-
-
-    # def last_page_link
-    #   "#{page_url(total_pages)}"
-    # end
-
-    # def build_links
-    #   array = []
-    #   if total_pages > 1
-
-    #     (first_page_in_group..last_page_in_group).each do |index|
-    #       array << page_link(index)
-    #     end
-    #   end
-    #   array[0...group_size]
-    # end
-
-    # def page_link(page_number)
-    #   if current_page != page_number
-    #     "<a class='tag_link_page pagination_link' href='#{page_url(page_number)}'>#{page_number}</a>"
-    #   else
-    #     page_number.to_s
-    #   end
-    # end
+    def last_page_html
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Last Page' href='#{last_page_link}'>Last Page</a>
+      </li>"
+    end
 
   end
-
 end
-
-# module MobilePagination
-
-#   class Paginate
-
-#     attr_accessor :total_pages
-
-
-
-#   end
-# end
-# # ul.pagination-links
-# #       - if previous_page?
-# #         li.btns
-# #           a.tag_link_first.pagination_first_link.sprite title="First Page" href="#{first_page_link}"
-
-# #         li.btns
-# #           a.tag_link_prev.pagination_previous_link.sprite title="Previous Page" href="#{previous_page}"
-
-# #       li
-# #         .current #{heading}
-
-# #       - if next_page?
-# #         li.btns
-# #           a.tag_link_next.pagination_next_link.sprite title="Next Page" href="#{next_page}" class="next_page_link"
-
-# #         li.btns
-# #           a.tag_link_last.pagination_last_link.sprite title="Last Page" href="#{last_page_link}" class="next_page_link"
