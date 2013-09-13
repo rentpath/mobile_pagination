@@ -24,80 +24,87 @@ module MobilePagination
   class Paginate
 
     def initialize(opts)
-      @current_page = current(opts[:page])
-      @total_pages  = opts[:total_pages] || 0
-      @total_pages  = opts[:path] || '/'
+      @total_pages  = opts[:total_pages].to_i
+      @current_page = current(opts[:current_page])
+      @path         = opts[:path] || '/'
       @query_params = query_to_hash(opts[:query])
-
     end
 
-    def query_to_hash qs
+    def query_to_hash(qs)
       Rack::Utils.parse_nested_query(qs) || {}
     end
 
+    def hash_to_query(hash)
+      URI.encode(hash.map{|k,v| "#{k}=#{v}"}.join("&"))
+    end
+
     def html
-      ''.tap do |html|
-        html << first_link if previous_page?
+      ''.tap do |markup|
+        markup << first_link  if previous_page?
+        if next_page?
+          markup << second_link
+        end
       end
     end
 
     def first_link
-      '<li.btns>
-        <a.tag_link_first.pagination_first_link.sprite title="First Page" href="#{first_page_link}"></a>
-      </li>'
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Previous Page' href='#{previous_page_link}'>Previous Page</a>
+      </li>"
+    end
+
+    def second_link
+      "<li class='#{MobilePagination.configuration.list_item_global_class}'>
+        <a class='#{MobilePagination.configuration.anchor_global_class}' title='Next Page' href='#{next_page_link}'>Next Page</a>
+      </li>"
     end
 
     def previous_page
-      "#{page_url(current_page - 1)}" if current_page > 1
+      "#{page_url(@current_page - 1)}" if @current_page > 1
     end
 
     def previous_page?
-      !previous_page.nil?
+      @current_page > 1
     end
 
-    def first_page_link
-      "#{page_url(1)}"
+    def previous_page_link
+      prev = @current_page - 1
+      prev == 1 ? "#{page_url}" :  "#{page_url(prev)}"
     end
 
-    def page_url(page_number)
-      opts = { configuration.page_key => page_number }
-      uri = Addressable::URI.new.query_values = query_params.merge(opts)
-      path + '/?' + uri.query
+    def page_url(page=nil)
+      opts = {
+        MobilePagination.configuration.page_key => page
+      }
+      qs = hash_to_query(@query_params.merge(opts))
+      page.nil? ? "#{@path}" : "#{@path}?#{qs}"
     end
 
-    def current (page)
-      page = 0 if page.nil?
-      page > total_pages ? total_pages : page
+    def current(page)
+      page = page.nil? ? 1 : page.to_i
+      page > @total_pages ? @total_pages : page
     end
-
-        # def total_pages
-    #   @results['total_pages']
-    # end
-
 
     # def check_opts
     #   @total_pages.to_i if @total_pages.is_a? String
     # end
 
-    # def heading
-    #   "Page #{current_page} of #{total_pages}"
     # end
 
     # def links
     #   build_links
     # end
 
+    def next_page?
+      not next_page_link.nil?
+    end
 
+    def next_page_link
+      if @current_page < @total_pages
+        "#{page_url(@current_page + 1)}"
+      end
+    end
 
-
-
-    # def next_page
-    #  "#{page_url(current_page + 1)}" if current_page < total_pages
-    # end
-
-    # def next_page?
-    #   !next_page.nil?
-    # end
 
     # def previous_group
     #   @previous_group ||= "#{page_url(first_page_in_group - group_size)}" if current_page > group_size

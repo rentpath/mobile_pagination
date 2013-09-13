@@ -11,8 +11,6 @@ Gem::Specification.new do |gem|
  gem.homepage      = 'http://github.com/lfender6445/mobile_pagination'
  gem.license       = "MIT"
 
- gem.add_dependency "addressable", '~> 2.3.4'
-
  gem.add_development_dependency "rake"
 
  gem.required_ruby_version = '>= 1.9.3'
