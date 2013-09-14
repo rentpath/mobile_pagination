@@ -21,7 +21,7 @@ Or install it yourself as:
     $ gem install mobile_pagination
 
 ## Usage
-There are 4 required options  `current_page, total_pages, query, path`
+Initializes with 4 options: `current_page, total_pages, query, path`
 
 ```ruby
 require 'mobile_pagination'
@@ -38,7 +38,7 @@ def opts
 end
 
 def pagination
-  MobilePagination::Paginate.new(pagination_opts).html
+  MobilePagination::Paginate.new(opts).html
 end
 
 # in your view, you may have something like this:
@@ -55,7 +55,7 @@ MobilePagination.configure do |config|
 end
 ```
 
-The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is 'page'.
+Configuration must run prior to initialization. The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is `page`.
 
 ### Overrides
 
@@ -95,7 +95,7 @@ module MobilePagination
 end
 ```
 
-Please note, any methods ending in _link will need to remain, as these methods are responsible for generating the paginated urls.
+Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
 
 ## Contributing
