@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
  gem.authors       = ["Luke Fender"]
  gem.email         = ["lfender6445@gmail.com"]
  gem.description   = %q{Creates a series of pagination elements relative to current page.}
- gem.summary       = %q{Minimal and configurable pagination templating, best suited for minimal screenspace. Provides buttons for first, previous, next, and last page.}
+ gem.summary       = %q{Minimal and configurable pagination templating, best suited for smaller screenspace. Provides buttons for first, previous, next, and last page.}
  gem.homepage      = 'http://github.com/lfender6445/mobile_pagination'
  gem.license       = "MIT"
 

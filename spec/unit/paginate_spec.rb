@@ -19,8 +19,8 @@ module MobilePagination
     describe 'readers' do
       before do
         opts = {
-          :total_pages  => 0,
-          :current_page => 0,
+          :total_pages  => 2,
+          :current_page => 2,
           :query_params => 'a=1&b=2',
           :path         => '/abc/'
         }
@@ -28,8 +28,8 @@ module MobilePagination
       end
 
       it 'should assign properties' do
-        expect(@klass.total_pages).to eq 0
-        expect(@klass.current_page).to eq 0
+        expect(@klass.total_pages).to eq 2
+        expect(@klass.current_page).to eq 2
         expect(@klass.query_params).to eq({})
         expect(@klass.path).to eq "/abc/"
       end
@@ -72,6 +72,23 @@ module MobilePagination
         end
       end
 
+      describe 'Templates' do
+        it '#first_page_html should return string' do
+          @klass.first_page_html.should be_a_kind_of(String)
+        end
+        it '#previous_page_html should return string' do
+          @klass.previous_page_html.should be_kind_of(String)
+        end
+        it '#next_page_html should return string' do
+          @klass.next_page_html.should be_kind_of(String)
+        end
+        it '#last_page_html should return string' do
+          @klass.last_page_html.should be_kind_of(String)
+        end
+        it '#html return blank string unless total_pages' do
+          @klass.html.should be_kind_of(String)
+        end
+      end
     end
 
   end

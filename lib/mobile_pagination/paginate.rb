@@ -43,10 +43,6 @@ module MobilePagination
         not next_page_link.nil?
       end
 
-      def previous_page
-        "#{page_url(@current_page - 1)}"
-      end
-
       def current(page)
         page = page.nil? ? 1 : page.to_i
         page > @total_pages ? @total_pages : page

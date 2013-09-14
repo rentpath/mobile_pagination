@@ -1,7 +1,8 @@
 # MobilePagination
 
 ## Description
-Rack gem for producing simple pagination links.
+Rack gem for producing minimal pagination links.
+
 ![<Display Name>](http://i.imgur.com/qZcqfx8.png)
 
 
@@ -21,14 +22,17 @@ Or install it yourself as:
 
 ## Usage
 There are 4 required options  `current_page, total_pages, query, path`
+    ```ruby
     require 'mobile_pagination'
+
+    //http://local.m.newhomeguide.com/New-Homes/Georgia/Atlanta/?page=2
 
     def opts
       {
-        :current_page => params[:page],         # assumes /?page=2
-        :total_pages  => 3,                     # total number of pages
-        :query        => request.query_string,  # query string
-        :path         => request.path           # url path
+        :current_page => params[:page],         # => 2
+        :total_pages  => total_pages,           # => Int for total pages
+        :query        => request.page=2,        # => 'page=2'
+        :path         => request.path           # => '/New-Homes/Georgia/Atlanta/'
       }
     end
 
@@ -39,17 +43,21 @@ There are 4 required options  `current_page, total_pages, query, path`
     # in your view, you may have something like this:
     ol
       = pagination
+    ```
 
 Configuration is optional. Say for example you were paginating slides on a slideshow - instead of using page, you could configure the gem to use a different key.
 
-  MobilePagination.configure do |config|
-    config.page_key = 'slide'
-  end
+    ```ruby
+    MobilePagination.configure do |config|
+      config.page_key = 'slide'
+    end
+    ```
 
-The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure.
+The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is 'page'.
 
 If you don't like list items, you can also override the MobilePagination::Templates. Just add this to the bottom of one of your view helpers:
 
+    ```ruby
     module MobilePagination
       module Templates
 
@@ -79,8 +87,9 @@ If you don't like list items, you can also override the MobilePagination::Templa
 
       end
     end
+    ```
 
-Please note, any method ending in _link will need to remain, as these methods are responsible for generating the paginated urls.
+Please note, any methods ending in _link will need to remain, as these methods are responsible for generating the paginated urls.
 
 
 ## Contributing
