@@ -1,6 +1,7 @@
 # MobilePagination
 
 ## Description
+rack gem for producing simple pagination links.
 
 ## Installation
 

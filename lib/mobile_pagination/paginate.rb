@@ -4,48 +4,13 @@ module MobilePagination
     include Templates
     include Utils
 
+    attr_reader :total_pages, :current_page, :query_params, :path
+
     def initialize(opts)
-      @total_pages  = opts[:total_pages].to_i
+      @total_pages  = opts[:total_pages].to_i || 0
       @current_page = current(opts[:current_page])
       @query_params = query_to_hash(opts[:query])
       @path         = opts[:path] || '/'
-    end
-
-    def html
-      return '' unless should_paginate?
-      ''.tap do |markup|
-        markup << first_page_html    if previous_page?
-        markup << previous_page_html if previous_page?
-        markup << next_page_html     if next_page?
-        markup << last_page_html     if next_page?
-      end
-    end
-
-    private
-
-    def should_paginate?
-      @total_pages > 1
-    end
-
-    def previous_page
-      "#{page_url(@current_page - 1)}"
-    end
-
-    def current(page)
-      page = page.nil? ? 1 : page.to_i
-      page > @total_pages ? @total_pages : page
-    end
-
-    def previous
-      @current_page - 1
-    end
-
-    def previous_page?
-      @current_page > 1
-    end
-
-    def next_page?
-      not next_page_link.nil?
     end
 
     def first_page_link
@@ -64,14 +29,44 @@ module MobilePagination
       "#{page_url(@total_pages)}"
     end
 
-    def page_url(page=nil)
-      qs = hash_to_query(opts_with_key)
-      page.nil? ? "#{@path}" : "#{@path}?#{qs}"
-    end
+    private
 
-    def opts_with_key
-      @query_params.merge({ MobilePagination.configuration.page_key => page })
-    end
+      def should_paginate?
+        @total_pages > 1
+      end
+
+      def previous_page?
+        @current_page > 1
+      end
+
+      def next_page?
+        not next_page_link.nil?
+      end
+
+      def previous_page
+        "#{page_url(@current_page - 1)}"
+      end
+
+      def current(page)
+        page = page.nil? ? 1 : page.to_i
+        page > @total_pages ? @total_pages : page
+      end
+
+      def previous
+        @current_page - 1
+      end
+
+      def page_url(page=nil)
+        page.nil? ? "#{@path}" : "#{@path}?#{qs(page)}"
+      end
+
+      def qs(page)
+        hash_to_query(opts_with_key(page))
+      end
+
+      def opts_with_key(page)
+        @query_params.merge({ MobilePagination.configuration.page_key => page })
+      end
 
   end
 end
