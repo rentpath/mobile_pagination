@@ -2,13 +2,13 @@ module MobilePagination
   module Templates
 
     def first_page_html
-      "<li class='btns'>
+      "<li>
         <a title='First Page' href='#{first_page_link}'>First Page</a> |
       </li>"
     end
 
     def previous_page_html
-      "<li'>
+      "<li>
         <a title='Previous Page' href='#{previous_page_link}'>Previous Page</a> |
       </li>"
     end

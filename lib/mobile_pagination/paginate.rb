@@ -1,8 +1,8 @@
 module MobilePagination
   class Paginate
 
-    include Templates
     include Utils
+    include Templates
 
     attr_reader :total_pages, :current_page, :query_params, :path
 
@@ -57,15 +57,25 @@ module MobilePagination
       end
 
       def page_url(page=nil)
-        page.nil? ? "#{@path}" : "#{@path}?#{qs(page)}"
+        page.nil? ? "#{@path}#{qs_without_key}" : "#{@path}#{qs_with_key(page)}"
       end
 
-      def qs(page)
-        hash_to_query(opts_with_key(page))
+
+      def qs_with_key(page)
+        "?#{hash_to_query(opts_with_key(page))}"
+      end
+
+      def qs_without_key
+        "?#{hash_to_query(opts_without_key)}"
       end
 
       def opts_with_key(page)
         @query_params.merge({ MobilePagination.configuration.page_key => page })
+      end
+
+      def opts_without_key
+        @query_params.delete(MobilePagination.configuration.page_key)
+        @query_params
       end
 
   end

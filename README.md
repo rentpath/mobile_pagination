@@ -21,6 +21,7 @@ Or install it yourself as:
 
 ## Usage
 There are 4 required options  `current_page, total_pages, query, path`
+    require 'mobile_pagination'
 
     def opts
       {
@@ -35,7 +36,7 @@ There are 4 required options  `current_page, total_pages, query, path`
       MobilePagination::Paginate.new(pagination_opts).html
     end
 
-    # in your view
+    # in your view, you may have something like this:
     ol
       = pagination
 
@@ -47,7 +48,7 @@ Configuration is optional. Say for example you were paginating slides on a slide
 
 The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure.
 
-If you don't like list items, you can also override the template methods. Just add this to one helpers:
+If you don't like list items, you can also override the MobilePagination::Templates. Just add this to the bottom of one of your view helpers:
 
     module MobilePagination
       module Templates
