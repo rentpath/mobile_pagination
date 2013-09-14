@@ -32,7 +32,7 @@ def opts
   {
     :current_page => params[:page],         # => 2
     :total_pages  => total_pages,           # => Int for total pages
-    :query        => request.page=2,        # => 'page=2'
+    :query        => request.query_string,  # => 'page=2'
     :path         => request.path           # => '/New-Homes/Georgia/Atlanta/'
   }
 end
@@ -69,7 +69,7 @@ module MobilePagination
 
     def first_page_html
       "<p'>
-        <a title='First Page' href='#{first_page_link}'>Luke Page</a> |
+        <a title='First Page' href='#{first_page_link}'>Luke's Page</a> |
       <p>"
     end
 
@@ -80,15 +80,15 @@ module MobilePagination
     end
 
     def next_page_html
-      "<li>
+      "<span>
         <a title='Next Page' href='#{next_page_link}'>Next Page</a> |
-      </li>"
+      </span>"
     end
 
     def last_page_html
-      "<li>
+      "<h3>
         <a title='Last Page' href='#{last_page_link}'>Last Page</a>
-      </li>"
+      </h3>"
     end
 
   end
