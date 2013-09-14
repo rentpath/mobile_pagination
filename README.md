@@ -26,7 +26,7 @@ There are 4 required options  `current_page, total_pages, query, path`
 ```ruby
 require 'mobile_pagination'
 
-//http://local.m.newhomeguide.com/New-Homes/Georgia/Atlanta/?page=2
+# http://local.m.newhomeguide.com/New-Homes/Georgia/Atlanta/?page=2
 
 def opts
   {
@@ -46,6 +46,7 @@ ol
   = pagination
 ```
 
+### Configuration
 Configuration is optional. Say for example you were paginating slides on a slideshow - instead of using page, you could configure the gem to use a different key.
 
 ```ruby
@@ -56,7 +57,11 @@ end
 
 The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is 'page'.
 
-If you don't like list items, you can also override the MobilePagination::Templates. Just add this to the bottom of one of your view helpers:
+### Overrides
+
+If you don't like list items, you will need to override `MobilePagination::Templates`
+
+Just add this to the bottom of one of your view helpers:
 
 ```ruby
 module MobilePagination
