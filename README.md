@@ -8,7 +8,7 @@ MobilePagination
 
 Gem for producing minimal pagination links, best suited for smaller screens.
 
-![<Display Name>](http://i.imgur.com/qZcqfx8.png)
+![<Display Name>](http://i.imgur.com/xvzh817.png)
 
 ## Installation
 
