@@ -6,6 +6,10 @@ mobile_pagination
 [![Dependency Status](https://gemnasium.com/primedia/mobile_pagination.png)](https://gemnasium.com/primedia/mobile_pagination)
 [![Gem Version](https://badge.fury.io/rb/mobile_pagination.png)](http://badge.fury.io/rb/mobile_pagination)
 
+Gem for producing minimal pagination links, best suited for smaller screens.
+
+![<Display Name>](http://i.imgur.com/qZcqfx8.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
