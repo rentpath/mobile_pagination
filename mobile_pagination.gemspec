@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["lfender6445@gmail.com"]
   spec.description   = %q{reates a series of pagination elements relative to current page.}
   spec.summary       = %q{Minimal and configurable pagination templating, best suited for smaller screenspace. Provides buttons for first, previous, next, and last page.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/primedia/mobile_pagination?source=c"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
