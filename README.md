@@ -31,7 +31,7 @@ Initializes with 4 options: `current_page, total_pages, query, path`
 ```ruby
 # in your view, you may have something like this:
 ol
-  = pagination
+  = pagination_html
 
 # in your helpers, you might have something like:
 
@@ -49,7 +49,11 @@ def opts
 end
 
 def pagination
-  MobilePagination::Paginate.new(opts).html
+  @pagination ||= MobilePagination::Paginate.new(opts).html
+end
+
+def pagination_html
+  pagination.html
 end
 
 ```
@@ -91,6 +95,8 @@ module MobilePagination
   end
 end
 ```
+Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
+
 ### Configuration
 Configuration is optional.
 
@@ -104,7 +110,6 @@ end
 
 Configuration must run prior to initialization. The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is `page`.
 
-Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
 ## Contributing
 

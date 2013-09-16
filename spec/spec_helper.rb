@@ -8,7 +8,6 @@ Coveralls.wear!
 SimpleCov.start {
   add_filter '/spec/'
   add_filter '/vendor/'
-
 }
 
 require 'mobile_pagination'
