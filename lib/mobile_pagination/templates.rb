@@ -28,10 +28,10 @@ module MobilePagination
     def html
       return '' unless should_paginate?
       ''.tap do |markup|
-        markup << first_page_html    if previous_page?
+        markup << first_page_html    if first_page?
         markup << previous_page_html if previous_page?
         markup << next_page_html     if next_page?
-        markup << last_page_html     if next_page?
+        markup << last_page_html     if last_page?
       end
     end
 

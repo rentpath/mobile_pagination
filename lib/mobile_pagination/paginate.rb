@@ -35,12 +35,24 @@ module MobilePagination
         @total_pages > 1
       end
 
+      def first_page?
+        @current_page != 1
+      end
+
       def previous_page?
-        @current_page > 1
+        @current_page > 2
       end
 
       def next_page?
-        not next_page_link.nil?
+        last_page? && !second_to_last?
+      end
+
+      def last_page?
+        @current_page != @total_pages
+      end
+
+      def second_to_last?
+        @current_page == (@total_pages - 1)
       end
 
       def current(page)
@@ -56,13 +68,13 @@ module MobilePagination
         page.nil? ? "#{@path}#{qs_without_key}" : "#{@path}#{qs_with_key(page)}"
       end
 
-
       def qs_with_key(page)
         "?#{hash_to_query(opts_with_key(page))}"
       end
 
       def qs_without_key
-        "?#{hash_to_query(opts_without_key)}"
+        str = "#{hash_to_query(opts_without_key)}"
+        str.insert(0, '?') unless str.empty?
       end
 
       def opts_with_key(page)
