@@ -1,3 +1,6 @@
+require 'mobile_pagination/utils'
+require 'mobile_pagination/templates'
+
 module MobilePagination
   class Paginate
 

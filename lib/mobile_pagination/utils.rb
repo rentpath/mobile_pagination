@@ -1,4 +1,5 @@
 require 'rack/utils'
+require 'uri'
 
 module MobilePagination
   module Utils
