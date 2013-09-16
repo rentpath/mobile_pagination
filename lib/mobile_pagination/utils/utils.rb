@@ -1,3 +1,5 @@
+require 'rack/utils'
+
 module MobilePagination
   module Utils
 

@@ -1,9 +1,12 @@
 require 'rubygems'
 require 'simplecov'
 require 'bundler/setup'
-require 'rack/utils'
 
-SimpleCov.start { add_filter '/spec/' }
+SimpleCov.start {
+  add_filter '/spec/'
+  add_filter '/vendor/'
+
+}
 
 require 'mobile_pagination'
 

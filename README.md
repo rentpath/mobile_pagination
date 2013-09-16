@@ -1,10 +1,9 @@
 # MobilePagination
 
 ## Description
-Rack gem for producing minimal pagination links.
+Gem for producing minimal pagination links, best suited for smaller screens.
 
 ![<Display Name>](http://i.imgur.com/qZcqfx8.png)
-
 
 ## Installation
 
@@ -24,6 +23,12 @@ Or install it yourself as:
 Initializes with 4 options: `current_page, total_pages, query, path`
 
 ```ruby
+# in your view, you may have something like this:
+ol
+  = pagination
+
+# in your helpers, you might have something like:
+
 require 'mobile_pagination'
 
 # http://local.m.newhomeguide.com/New-Homes/Georgia/Atlanta/?page=2
@@ -41,21 +46,7 @@ def pagination
   MobilePagination::Paginate.new(opts).html
 end
 
-# in your view, you may have something like this:
-ol
-  = pagination
 ```
-
-### Configuration
-Configuration is optional. Say for example you were paginating slides on a slideshow - instead of using page, you could configure the gem to use a different key.
-
-```ruby
-MobilePagination.configure do |config|
-  config.page_key = 'slide'
-end
-```
-
-Configuration must run prior to initialization. The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is `page`.
 
 ### Overrides
 
@@ -94,6 +85,18 @@ module MobilePagination
   end
 end
 ```
+### Configuration
+Configuration is optional.
+
+Say for example you were paginating slides on a slideshow - instead of using page, you could configure the gem to use a different key.
+
+```ruby
+MobilePagination.configure do |config|
+  config.page_key = 'slide'
+end
+```
+
+Configuration must run prior to initialization. The resulting pagination links will now contain `/?slide=2, /?slide=3` to suit your custom url structure. The default page_key is `page`.
 
 Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
