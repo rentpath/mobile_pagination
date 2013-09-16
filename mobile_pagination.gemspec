@@ -1,26 +1,29 @@
 # coding: utf-8
-require 'date'
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require './lib/mobile_pagination/utils/version'
 
-Gem::Specification.new do |gem|
- gem.name          = "mobile_pagination"
- gem.authors       = ["Luke Fender"]
- gem.email         = ["lfender6445@gmail.com"]
- gem.description   = %q{Creates a series of pagination elements relative to current page.}
- gem.summary       = %q{Minimal and configurable pagination templating, best suited for smaller screenspace. Provides buttons for first, previous, next, and last page.}
- gem.homepage      = 'http://github.com/lfender6445/mobile_pagination'
- gem.license       = "MIT"
+Gem::Specification.new do |spec|
+  spec.name          = "mobile_pagination"
+  spec.version       = MobilePagination::VERSION
+  spec.authors       = ["Luke Fender"]
+  spec.email         = ["lfender6445@gmail.com"]
+  spec.description   = %q{reates a series of pagination elements relative to current page.}
+  spec.summary       = %q{Minimal and configurable pagination templating, best suited for smaller screenspace. Provides buttons for first, previous, next, and last page.}
+  spec.homepage      = ""
+  spec.license       = "MIT"
 
- gem.add_development_dependency "rake"
- gem.add_development_dependency 'simplecov'
- gem.add_development_dependency 'guard-rspec'
- gem.add_development_dependency 'rack-test'
- gem.add_development_dependency 'rspec'
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
 
- gem.required_ruby_version = '>= 1.9.3'
- gem.platform      = Gem::Platform::RUBY
- gem.date          = Date.today.to_s
- gem.files         = `git ls-files`.split("\n")
- gem.require_paths = ["lib"]
- gem.version       = MobilePagination::VERSION
+  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'guard-rspec'
+  spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'rspec'
 end

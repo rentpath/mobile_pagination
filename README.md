@@ -1,11 +1,17 @@
-# MobilePagination
+mobile_pagination
+=========
+[![Code Climate](https://codeclimate.com/github/primedia/mobile_pagination.png)](https://codeclimate.com/github/primedia/mobile_pagination)
+[![Build Status](https://travis-ci.org/primedia/mobile_pagination.png)](https://travis-ci.org/primedia/mobile_pagination)
+[![Coverage Status](https://coveralls.io/repos/primedia/mobile_pagination/badge.png?branch=dev)](https://coveralls.io/r/primedia/mobile_pagination?branch=dev)
+[![Dependency Status](https://gemnasium.com/primedia/mobile_pagination.png)](https://gemnasium.com/primedia/mobile_pagination)
+[![Gem Version](https://badge.fury.io/rb/mobile_pagination.png)](http://badge.fury.io/rb/mobile_pagination)
 
-## Description
-Gem for producing minimal pagination links, best suited for smaller screens.
+## Requirements
 
-![<Display Name>](http://i.imgur.com/qZcqfx8.png)
+...
 
 ## Installation
+
 
 Add this line to your application's Gemfile:
 
@@ -18,6 +24,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install mobile_pagination
+
 
 ## Usage
 Initializes with 4 options: `current_page, total_pages, query, path`
@@ -100,8 +107,7 @@ Configuration must run prior to initialization. The resulting pagination links w
 
 Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
-### Testing
-`rspec spec`
+...
 
 ## Contributing
 
@@ -110,3 +116,16 @@ Please note, any methods ending in `_link` will need to remain, as these methods
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Running the Tests
+
+`rspec spec`
+
+## Credits
+
+...
+
+## License
+
+mobile_pagination is released under the MIT License. See the bundled LICENSE file for
+details.
