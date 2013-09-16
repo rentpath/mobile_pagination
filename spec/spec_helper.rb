@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'simplecov'
 require 'bundler/setup'
+require 'coveralls'
+
+Coveralls.wear!
 
 SimpleCov.start {
   add_filter '/spec/'
