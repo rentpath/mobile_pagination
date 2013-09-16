@@ -97,6 +97,8 @@ end
 
 Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
+### Testing
+`rspec spec`
 
 ## Contributing
 
