@@ -6,12 +6,7 @@ mobile_pagination
 [![Dependency Status](https://gemnasium.com/primedia/mobile_pagination.png)](https://gemnasium.com/primedia/mobile_pagination)
 [![Gem Version](https://badge.fury.io/rb/mobile_pagination.png)](http://badge.fury.io/rb/mobile_pagination)
 
-## Requirements
-
-...
-
 ## Installation
-
 
 Add this line to your application's Gemfile:
 
@@ -107,8 +102,6 @@ Configuration must run prior to initialization. The resulting pagination links w
 
 Please note, any methods ending in `_link` will need to remain, as these methods are responsible for generating the paginated urls.
 
-...
-
 ## Contributing
 
 1. Fork it
@@ -122,10 +115,6 @@ Please note, any methods ending in `_link` will need to remain, as these methods
 `rake`
 
 There is a default `spec` task that will run.
-
-## Credits
-
-...
 
 ## License
 
