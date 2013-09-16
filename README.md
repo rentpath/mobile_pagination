@@ -119,7 +119,9 @@ Please note, any methods ending in `_link` will need to remain, as these methods
 
 ## Running the Tests
 
-`rspec spec`
+`rake`
+
+There is a default `spec` task that will run.
 
 ## Credits
 
@@ -127,5 +129,4 @@ Please note, any methods ending in `_link` will need to remain, as these methods
 
 ## License
 
-mobile_pagination is released under the MIT License. See the bundled LICENSE file for
-details.
+mobile_pagination is released under the MIT License. See the bundled LICENSE file for details.
