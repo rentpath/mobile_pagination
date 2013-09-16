@@ -1,4 +1,4 @@
-mobile_pagination
+MobilePagination
 =========
 [![Code Climate](https://codeclimate.com/github/primedia/mobile_pagination.png)](https://codeclimate.com/github/primedia/mobile_pagination)
 [![Build Status](https://travis-ci.org/primedia/mobile_pagination.png)](https://travis-ci.org/primedia/mobile_pagination)
