@@ -49,7 +49,7 @@ def opts
 end
 
 def pagination
-  @pagination ||= MobilePagination::Paginate.new(opts).html
+  @pagination ||= MobilePagination::Paginate.new(opts)
 end
 
 def pagination_html
