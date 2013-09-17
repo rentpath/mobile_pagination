@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = MobilePagination::VERSION
   spec.authors       = ["Luke Fender"]
   spec.email         = ["lfender6445@gmail.com"]
-  spec.description   = %q{reates a series of pagination elements relative to current page.}
-  spec.summary       = %q{Minimal and configurable pagination templating, best suited for smaller screenspace. Provides buttons for first, previous, next, and last page.}
+  spec.description   = %q{Creates a series of pagination elements relative to current page, best suited for minimal screenspace.}
+  spec.summary       = %q{Provides pagination elemenents for first, previous, next, and last page.}
   spec.homepage      = "https://github.com/primedia/mobile_pagination?source=c"
   spec.license       = "MIT"
 
