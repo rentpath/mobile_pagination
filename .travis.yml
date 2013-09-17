@@ -1,20 +1,24 @@
+---
 language: ruby
 rvm:
-  - "1.8.7"
-  - "1.9.2"
-  - "1.9.3"
-  - "2.0.0"
-  - jruby-18mode # JRuby in 1.8 mode
-  - jruby-19mode # JRuby in 1.9 mode
-  - rbx-18mode
-  - rbx-19mode
-notifications:
-  campfire:
-    secure: "GnEk4I+ZRjW8h7x6rtZaI/2BfhErJkeELkbjamg3a4CnRQgAKzQZUNwQL8NH\nfbxmAcVSZfVPF6unw0XMY54pgO0+6Fp6fkypaV4fpDgSJEE+6QsSJxBEPN0w\n0bkXKa7/gsRpPLx6GwkQCqSAQIf+aVB0zTV7m1spMoRE40cXZss="
-    on_success: always
-    on_failure: always
+- 1.8.7
+- 1.9.2
+- 1.9.3
+- 2.0.0
+- jruby-18mode
+- jruby-19mode
+- rbx-18mode
+- rbx-19mode
 matrix:
   allow_failures:
-    - rvm: 1.8.7
-    - rvm: jruby-18mode
-    - rvm: rbx-18mode
+  - rvm: 1.8.7
+  - rvm: jruby-18mode
+  - rvm: rbx-18mode
+notifications:
+  campfire:
+    rooms:
+      secure: ! 'cYNdCV3+8DM672sQW27UbHqs2Rrcxv7aXvTZkA7nN0pDKuRWalMVpL2RsRWk
+
+        ZyMqu+m0R7j16Twz70hq5d1Z9+EPayj/vIL7h/HjkNW/hU6G4TARXdSI0YUl
+
+        4C9E5JCL7ZvG/RPUUnecyzYrJGIt+CuHHtONqorgtNQfqOzA8H0='
