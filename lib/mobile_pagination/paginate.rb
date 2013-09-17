@@ -16,42 +16,50 @@ module MobilePagination
       @path         = opts[:path] || '/'
     end
 
-    def first_page_link
-      "#{page_url}"
-    end
-
     def previous_page_link
       previous == 1 ? "#{first_page_link}" : "#{page_url(previous)}"
     end
 
     def next_page_link
-      "#{page_url(@current_page + 1)}" if @current_page < @total_pages
+      "#{page_url(@current_page + 1)}"
+    end
+
+    def first_page_link
+      "#{page_url}"
     end
 
     def last_page_link
       "#{page_url(@total_pages)}"
     end
 
+    def previous_page?
+      @current_page > 1
+    end
+
+    def next_page?
+      @current_page < @total_pages
+    end
+
+    def should_paginate?
+      @total_pages > 1
+    end
+
     private
 
-      def should_paginate?
-        @total_pages > 1
-      end
-
-      def first_page?
+      def display_first_page?
         @current_page != 1
       end
 
-      def previous_page?
-        @current_page > 2
+      def display_next_page?
+        display_last_page? && !second_to_last?
       end
 
-      def next_page?
-        last_page? && !second_to_last?
-      end
-
-      def last_page?
+      def display_last_page?
         @current_page != @total_pages
+      end
+
+      def display_previous_page?
+        @current_page > 2
       end
 
       def second_to_last?

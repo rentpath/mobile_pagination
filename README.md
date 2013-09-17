@@ -26,7 +26,7 @@ Or install it yourself as:
 
 
 ## Usage
-Initializes with 4 options: `current_page, total_pages, query, path`
+Initializes with 4 options: `current_page, total_pages, query, path`.
 
 ```ruby
 # in your view, you may have something like this:
@@ -53,10 +53,23 @@ def pagination
 end
 
 def pagination_html
-  pagination.html
+  pagination.html # => returns paginated elements
 end
 
+# Other public methods
+
+previous_page_link  # => path for the previous page
+next_page_link      # => path for the next page
+
+previous_page?      # => true or false
+next_page?          # => true or false
+should_paginate?    # => true or false
+
+# Readers
+current_page, total_pages query, path
 ```
+
+Take a look at lib/mobile_pagination/paginate.rb for more information.
 
 ### Overrides
 
@@ -69,7 +82,7 @@ module MobilePagination
   module Templates
 
     def first_page_html
-      "<p'>
+      "<p>
         <a title='First Page' href='#{first_page_link}'>Luke's Page</a> |
       <p>"
     end
