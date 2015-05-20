@@ -20,3 +20,4 @@ tmp
 .bundle
 vendor/ruby
 .rvmrc
+/.idea/
